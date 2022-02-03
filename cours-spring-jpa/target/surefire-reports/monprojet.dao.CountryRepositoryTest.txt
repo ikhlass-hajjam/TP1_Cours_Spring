@@ -1,0 +1,26 @@
+-------------------------------------------------------------------------------
+Test set: monprojet.dao.CountryRepositoryTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 12.168 s <<< FAILURE! - in monprojet.dao.CountryRepositoryTest
+populationParPaysTest  Time elapsed: 0.543 s  <<< ERROR!
+org.springframework.dao.InvalidDataAccessResourceUsageException: could not prepare statement; SQL [SELECT SUM(POPULATION) FROM COUNTRY INNER JOIN CITY c ON c.COUNTRY = COUNTRY.id WHERE COUNTRY.id = ?]; nested exception is org.hibernate.exception.SQLGrammarException: could not prepare statement
+	at monprojet.dao.CountryRepositoryTest.populationParPaysTest(CountryRepositoryTest.java:50)
+Caused by: org.hibernate.exception.SQLGrammarException: could not prepare statement
+	at monprojet.dao.CountryRepositoryTest.populationParPaysTest(CountryRepositoryTest.java:50)
+Caused by: org.h2.jdbc.JdbcSQLSyntaxErrorException: 
+Colonne "C.COUNTRY" non trouvée
+Column "C.COUNTRY" not found; SQL statement:
+SELECT SUM(POPULATION) FROM COUNTRY INNER JOIN CITY c ON c.COUNTRY = COUNTRY.id WHERE COUNTRY.id = ? [42122-200]
+	at monprojet.dao.CountryRepositoryTest.populationParPaysTest(CountryRepositoryTest.java:50)
+
+ListNomPopulationParPaysTest  Time elapsed: 0.312 s  <<< ERROR!
+org.springframework.dao.InvalidDataAccessResourceUsageException: could not prepare statement; SQL [SELECT COUNTRY2.name, (SELECT SUM(CITY.population)FROM COUNTRY COUNTRY1 INNER JOIN CITY ON CITY.country = COUNTRY1.idWHERE COUNTRY1.id = COUNTRY2.id)FROM COUNTRY COUNTRY2ORDER BY COUNTRY2.name]; nested exception is org.hibernate.exception.SQLGrammarException: could not prepare statement
+	at monprojet.dao.CountryRepositoryTest.ListNomPopulationParPaysTest(CountryRepositoryTest.java:55)
+Caused by: org.hibernate.exception.SQLGrammarException: could not prepare statement
+	at monprojet.dao.CountryRepositoryTest.ListNomPopulationParPaysTest(CountryRepositoryTest.java:55)
+Caused by: org.h2.jdbc.JdbcSQLSyntaxErrorException: 
+Erreur de syntaxe dans l'instruction SQL "SELECT COUNTRY2.NAME, (SELECT SUM(CITY.POPULATION)FROM COUNTRY COUNTRY1 INNER JOIN CITY ON CITY.COUNTRY = COUNTRY1.IDWHERE COUNTRY1[*].ID = COUNTRY2.ID)FROM COUNTRY COUNTRY2ORDER BY COUNTRY2.NAME"; attendu "(, ., [, ::, AT, FORMAT, *, /, %, +, -, ||, ~, !~, NOT, LIKE, ILIKE, REGEXP, IS, IN, BETWEEN, AND, OR, RIGHT, LEFT, INNER, JOIN, CROSS, NATURAL, ,, WHERE, GROUP, HAVING, WINDOW, QUALIFY, UNION, EXCEPT, MINUS, INTERSECT, ORDER, OFFSET, FETCH, LIMIT, SAMPLE_SIZE, FOR, [, ::, AT, FORMAT, *, /, %, +, -, ||, ~, !~, NOT, LIKE, ILIKE, REGEXP, IS, IN, BETWEEN, AND, OR, ,, )"
+Syntax error in SQL statement "SELECT COUNTRY2.NAME, (SELECT SUM(CITY.POPULATION)FROM COUNTRY COUNTRY1 INNER JOIN CITY ON CITY.COUNTRY = COUNTRY1.IDWHERE COUNTRY1[*].ID = COUNTRY2.ID)FROM COUNTRY COUNTRY2ORDER BY COUNTRY2.NAME"; expected "(, ., [, ::, AT, FORMAT, *, /, %, +, -, ||, ~, !~, NOT, LIKE, ILIKE, REGEXP, IS, IN, BETWEEN, AND, OR, RIGHT, LEFT, INNER, JOIN, CROSS, NATURAL, ,, WHERE, GROUP, HAVING, WINDOW, QUALIFY, UNION, EXCEPT, MINUS, INTERSECT, ORDER, OFFSET, FETCH, LIMIT, SAMPLE_SIZE, FOR, [, ::, AT, FORMAT, *, /, %, +, -, ||, ~, !~, NOT, LIKE, ILIKE, REGEXP, IS, IN, BETWEEN, AND, OR, ,, )"; SQL statement:
+SELECT COUNTRY2.name, (SELECT SUM(CITY.population)FROM COUNTRY COUNTRY1 INNER JOIN CITY ON CITY.country = COUNTRY1.idWHERE COUNTRY1.id = COUNTRY2.id)FROM COUNTRY COUNTRY2ORDER BY COUNTRY2.name [42001-200]
+	at monprojet.dao.CountryRepositoryTest.ListNomPopulationParPaysTest(CountryRepositoryTest.java:55)
+
